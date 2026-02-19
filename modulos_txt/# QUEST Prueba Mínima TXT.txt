@@ -1,0 +1,5 @@
+# QUEST: Prueba Mínima TXT
+# MODULO: Módulo 1
+# LECCION: Lección con plugin simple
+CONTENIDO: Si ves este texto, el TXT se ha cargado. El plugin debería mostrar un mensaje en verde debajo.
+PLUGIN: document.getElementById('app').innerHTML = '<div style="background: #00ff00; color: black; padding: 20px; text-align: center; font-size: 24px;">✅ PLUGIN FUNCIONA DESDE TXT</div>';

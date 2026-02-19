@@ -1,0 +1,31 @@
+# Parámetros de ejemplo:
+# N_t: lista o array de 4 valores por cada t
+# W: matriz 4x4 de pesos W_ij
+# M(t): función de escala en el tiempo
+# I: parámetro > 0
+# C(N_i, N_j): función de interacción entre nodos
+
+def F_star(N_t, M_t, W, I, C, epsilon=1e-8):
+    total = 0.0
+    for i in range(4):
+        for j in range(i+1, 4):
+            total += 2 * W[i][j] * C(N_t[i], N_t[j])
+    base = max(epsilon, total)              # asegura positividad
+    exponent = 1 + math.log(I)             # exponente real
+    return M_t * (base ** exponent)
+
+
+
+
+F*(N_t, M_t) = M(t) * [ max(ε, Σ_{i=1}^{n} Σ_{j=i+1}^{n} 2 * W_ij * C(N_i, N_j)) ]^(1 + ln(I))  ----funcion + funcion narrativa
+
+
+
+lim_{T -> ∞} (1/T) Σ_{t=0}^{T} || A_t - F*(N_t, M_t) ||^2
+= lim_{T -> ∞} (1/T) Σ_{t=0}^{T} || A_t - M(t) * [ max(ε, Σ_{i=1}^{n} Σ_{j=i+1}^{n} 2 * W_ij * C(N_i, N_j)) ]^(1 + ln(I)) ||^2
+= 0
+
+
+
+F*(N_t, M_t) = M(t) * [ max(ε, Σ_{i=1}^{n} Σ_{j=i+1}^{n} 2 * W_ij * C(N_i, N_j)) ]^(1 + ln(I))
+

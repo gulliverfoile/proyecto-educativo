@@ -1,0 +1,4 @@
+# MODULO: Hardware Pro
+# LECCION: Simulador de Chips
+CONTENIDO: Esta lección instala automáticamente un simulador de registros de 4 bits.
+PLUGIN: document.getElementById('pluginZone').innerHTML = '<h3>Chip Simulator</h3><div style="display:flex;gap:10px"><button onclick="alert(\'Reg A: 0101\')" style="padding:10px">Ver Registro A</button><div id="display" style="color:cyan; font-size:20px">0000</div></div>';

@@ -1,0 +1,19 @@
+# QUEST: Falacia
+TIPO: critical
+AUTOR: Wikipedia contributors
+VERSION: 1.0
+
+# MODULO: Introducción
+ICONO: fa-info-circle
+# LECCION: Resumen
+CONTENIDO: Una falacia (del latín fallacia ‘engaño’) es un argumento que parece válido, pero no lo es. Algunas falacias son cometidas intencionalmente para persuadir o manipular a los demás, mientras que otras se cometen sin intención debido a descuidos o ignorancia...
+
+# MODULO: Falacias formales
+ICONO: fa-folder-open
+# LECCION: Falacias formales - Parte 1
+CONTENIDO: Las falacias formales son argumentos en los que la conclusión no se sigue de las premisas, independientemente del contenido...
+
+# MODULO: Falacias informales
+ICONO: fa-folder-open
+# LECCION: Falacias informales - Parte 1
+CONTENIDO: Las falacias informales dependen del contenido del argumento y no solo de su forma lógica...

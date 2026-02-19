@@ -1,0 +1,30 @@
+# QUEST: Reacciones químicas
+TIPO: critical
+AUTOR: Tu nombre
+VERSION: 1.0
+
+# MODULO: Tipos de reacciones
+ICONO: fa-flask
+# LECCION: Síntesis
+CONTENIDO: A + B → AB. Ejemplo: 2H₂ + O₂ → 2H₂O
+# LECCION: Descomposición
+CONTENIDO: AB → A + B. Ejemplo: 2H₂O → 2H₂ + O₂ (electrólisis)
+TIPO_EJERCICIO: opcion_multiple
+OPCION: Síntesis
+OPCION: Descomposición
+OPCION: Sustitución
+CORRECTA: 0
+FEEDBACK: ¡Sí! 2H₂ + O₂ → 2H₂O es una reacción de síntesis.
+
+# MODULO: Ajuste de reacciones
+ICONO: fa-balance-scale
+# LECCION: Ley de conservación de la masa
+CONTENIDO: El número de átomos de cada elemento debe ser el mismo en reactivos y productos.
+# LECCION: Ejemplo: ajustar C₃H₈ + O₂ → CO₂ + H₂O
+CONTENIDO: Primero ajustamos C: 3 CO₂. Luego H: 4 H₂O. Luego O: 3·2 + 4·1 = 10 O → 5 O₂. Reacción ajustada: C₃H₈ + 5O₂ → 3CO₂ + 4H₂O.
+TIPO_EJERCICIO: opcion_multiple
+OPCION: C₃H₈ + 5O₂ → 3CO₂ + 4H₂O
+OPCION: C₃H₈ + 3O₂ → 3CO₂ + 4H₂O
+OPCION: C₃H₈ + 6O₂ → 3CO₂ + 4H₂O
+CORRECTA: 0
+FEEDBACK: Correcto. Hay 3C, 8H y 10O a ambos lados.

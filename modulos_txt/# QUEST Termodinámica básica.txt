@@ -1,0 +1,34 @@
+# QUEST: Termodinámica básica
+TIPO: critical
+AUTOR: Tu nombre
+VERSION: 1.0
+
+# MODULO: Conceptos fundamentales
+ICONO: fa-thermometer-half
+# LECCION: Sistema, entorno, universo
+CONTENIDO: Un sistema es la parte del universo que estudiamos. El entorno es todo lo demás. El universo es sistema + entorno.
+# LECCION: Variables de estado
+CONTENIDO: Presión (P), volumen (V), temperatura (T), energía interna (U). Describen el estado del sistema.
+
+# MODULO: Primera ley
+ICONO: fa-bolt
+# LECCION: Conservación de la energía
+CONTENIDO: La variación de energía interna de un sistema es igual al calor intercambiado menos el trabajo realizado: ΔU = Q - W
+# LECCION: Ejemplo numérico
+CONTENIDO: Un gas absorbe 500 J de calor y realiza un trabajo de 300 J. ¿Cuánto aumenta su energía interna?
+TIPO_EJERCICIO: opcion_multiple
+OPCION: 200 J
+OPCION: 800 J
+OPCION: -200 J
+CORRECTA: 0
+FEEDBACK: ΔU = Q - W = 500 - 300 = 200 J.
+
+# MODULO: Segunda ley
+ICONO: fa-random
+# LECCION: Entropía
+CONTENIDO: La entropía mide el desorden. En un proceso real, la entropía del universo siempre aumenta.
+TIPO_EJERCICIO: verdadero_falso
+OPCION: Verdadero
+OPCION: Falso
+CORRECTA: 0
+FEEDBACK: ¡Correcto! Es la formulación de la segunda ley.

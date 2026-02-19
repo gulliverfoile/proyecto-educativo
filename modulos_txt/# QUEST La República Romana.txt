@@ -1,0 +1,28 @@
+# QUEST: La República Romana
+TIPO: critical
+AUTOR: Tu nombre
+VERSION: 1.0
+
+# MODULO: Orígenes
+ICONO: fa-flag
+# LECCION: Fundación de Roma
+CONTENIDO: Según la leyenda, Rómulo y Remo fundaron Roma en el 753 a.C. La República se establece en el 509 a.C. tras expulsar a los reyes etruscos.
+
+# MODULO: Instituciones
+ICONO: fa-university
+# LECCION: El Senado
+CONTENIDO: Compuesto por patricios, asesoraba a los magistrados y controlaba las finanzas y la política exterior.
+# LECCION: Los cónsules
+CONTENIDO: Dos magistrados supremos elegidos anualmente. Tenían el imperium (poder militar y judicial).
+TIPO_EJERCICIO: verdadero_falso
+OPCION: Los cónsules eran elegidos de por vida.
+OPCION: Falso, se elegían cada año.
+CORRECTA: 1
+FEEDBACK: Correcto, duraban un año para evitar la tiranía.
+
+# MODULO: Conflictos sociales
+ICONO: fa-users
+# LECCION: La lucha patricio-plebeya
+CONTENIDO: Los plebeyos exigían derechos. Lograron crear el tribunado de la plebe y la ley de las XII Tablas.
+# LECCION: Las guerras civiles
+CONTENIDO: Julio César, Pompeyo, Craso. El fin de la República llega con Augusto.

@@ -1,0 +1,43 @@
+# QUEST: Nietzsche: Voluntad de poder
+TIPO: critical
+AUTOR: Friedrich Nietzsche (adaptado)
+VERSION: 1.0
+
+# MODULO: Biografía y contexto
+ICONO: fa-user-graduate
+# LECCION: El filósofo del martillo
+CONTENIDO: Friedrich Nietzsche (1844-1900) fue un filósofo alemán que criticó la religión, la moral y la filosofía occidental. Su obra es fragmentaria, aforística y profundamente provocadora.
+# LECCION: Influencias
+CONTENIDO: Schopenhauer, Wagner, los presocráticos. Su relación con Wagner marcó su primera etapa.
+
+# MODULO: Conceptos clave
+ICONO: fa-key
+# LECCION: Voluntad de poder
+CONTENIDO: No es solo deseo de dominio, sino la fuerza fundamental que impulsa la vida a superarse constantemente. Todo ser vivo busca expandir su poder.
+# LECCION: Eterno retorno
+CONTENIDO: La idea de que el universo y todo lo que ocurre se repite infinitamente. Nietzsche la plantea como una prueba existencial: ¿vivirías tu vida una y otra vez igual?
+# LECCION: Superhombre (Übermensch)
+CONTENIDO: El ser humano es un puente, no una meta. El superhombre es aquel que crea sus propios valores más allá del bien y del mal, aceptando el eterno retorno.
+TIPO_EJERCICIO: opcion_multiple
+OPCION: Un ser con poderes sobrenaturales
+OPCION: Alguien que crea sus propios valores
+OPCION: Un líder político ideal
+CORRECTA: 1
+FEEDBACK: Correcto. El superhombre es el que trasciende la moral tradicional y crea sus propios valores.
+
+# MODULO: Crítica a la moral
+ICONO: fa-scale-balanced
+# LECCION: Moral de amos vs moral de esclavos
+CONTENIDO: Los amos valoran: noble, fuerte, poderoso. Los esclavos, por resentimiento, invierten los valores: humilde, débil, compasivo. El cristianismo es moral de esclavos.
+TIPO_EJERCICIO: verdadero_falso
+OPCION: Verdadero
+OPCION: Falso
+CORRECTA: 0
+FEEDBACK: Así es. Nietzsche considera el cristianismo una moral de esclavos que nace del resentimiento.
+
+# MODULO: Obras principales
+ICONO: fa-book
+# LECCION: Así habló Zaratustra
+CONTENIDO: Su obra más poética. Zaratustra baja de la montaña a enseñar el superhombre.
+# LECCION: Más allá del bien y del mal
+CONTENIDO: Crítica a la filosofía dogmática. Propone una filosofía "a martillazos".

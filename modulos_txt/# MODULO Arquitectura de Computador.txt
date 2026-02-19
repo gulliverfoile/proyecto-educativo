@@ -1,0 +1,9 @@
+# MODULO: Arquitectura de Computadores
+# LECCION: Microprocesadores 4-bits
+CONTENIDO: Los chips como el Intel 4004 usaban registros de 4 bits. Abajo tienes un simulador real inyectado desde este TXT para que pruebes la suma binaria.
+PLUGIN: const z=document.getElementById('pZone'); z.innerHTML='<h4>Simulador Inyectado</h4><div style="display:flex;gap:15px;margin:15px 0"><div style="background:#1e293b;padding:10px;border:1px solid #38bdf8">REG A: <span id="ra">0000</span> <button onclick="window.u(1)">+1</button></div><div style="background:#1e293b;padding:10px;border:1px solid #38bdf8">REG B: <span id="rb">0001</span></div></div><div style="color:yellow">ALU SUMA: <span id="rs">0001</span></div>'; window.u=v=>{let a=parseInt(document.getElementById('ra').innerText,2); a=(a+v)%16; document.getElementById('ra').innerText=a.toString(2).padStart(4,'0'); let b=parseInt(document.getElementById('rb').innerText,2); document.getElementById('rs').innerText=((a+b)%16).toString(2).padStart(4,'0')};
+
+# MODULO: Redes y Comunicaciones
+# LECCION: Flujo de Datos
+CONTENIDO: En esta lección vamos a simular un ping entre dos nodos.
+PLUGIN: document.getElementById('pZone').innerHTML = '<h4>Simulador de Red</h4><div style="background:#000;padding:10px;font-family:monospace">C:\\> ping 192.168.1.1<br><span id="ping" style="color:white"></span></div>'; let i=0; const t=setInterval(()=>{ if(i<4){document.getElementById('ping').innerHTML+='Respuesta desde 192.168.1.1: bytes=32 tiempo<1ms TTL=64<br>'; i++;}else{clearInterval(t)}},500);

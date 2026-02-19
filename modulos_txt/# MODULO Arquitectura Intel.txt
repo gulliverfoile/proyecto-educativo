@@ -1,0 +1,9 @@
+# MODULO: Arquitectura Intel
+# LECCION: El Chip 8080
+CONTENIDO: El 8080 fue el cerebro del Altair 8800. Introdujo el bus de datos de 8 bits.
+PLUGIN: document.getElementById('pluginZone').innerHTML = '<h4>Comparador de Bits</h4><input id="b1" value="0"> == <input id="b2" value="0">? <button onclick="alert(document.getElementById(\'b1\').value==document.getElementById(\'b2\').value)">Check</button>';
+
+# MODULO: Networking
+# LECCION: Capas OSI
+CONTENIDO: Las 7 capas definen la comunicación.
+[IMG:https://cdn.pixabay.com/photo/2016/11/30/15/23/ethernet-1872954_1280.jpg]

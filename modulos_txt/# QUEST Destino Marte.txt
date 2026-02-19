@@ -1,0 +1,26 @@
+# QUEST: Destino: Marte
+# MODULO: El Planeta Rojo
+ICONO: fa-rocket
+# LECCION: Geografía Marciana
+CONTENIDO: Marte es el cuarto planeta del sistema solar. Tiene el volcán más grande conocido: el Monte Olimpo.
+[IMG:https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800]
+¿Sabías que un día en Marte dura casi lo mismo que en la Tierra?
+TIPO_EJERCICIO: opcion_multiple
+OPCION: Monte Everest
+OPCION: Monte Olimpo
+OPCION: Teide
+CORRECTA: 1
+FEEDBACK: ¡Correcto! El Monte Olimpo mide 22.5 km de altura, casi 3 veces el Everest.
+
+# MODULO: Colonización
+ICONO: fa-user-astronaut
+# LECCION: El Viaje
+CONTENIDO: Tardaríamos entre 6 y 9 meses en llegar con la tecnología actual.
+[YT:dp8v_7L8r1w]
+Necesitaríamos escudos contra la radiación solar durante el trayecto.
+TIPO_EJERCICIO: opcion_multiple
+OPCION: 2 días
+OPCION: 1 año
+OPCION: 6-9 meses
+CORRECTA: 2
+FEEDBACK: Es un viaje largo, por eso la preparación psicológica es vital.

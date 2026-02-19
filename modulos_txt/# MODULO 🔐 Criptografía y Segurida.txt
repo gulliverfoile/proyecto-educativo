@@ -1,0 +1,62 @@
+# MODULO: 🔐 Criptografía y Seguridad
+# LECCION: El Arte de Ocultar Mensajes
+
+Esta lección es una prueba de estrés para el motor. Veremos si soporta:
+1.  **Tablas de datos** (Markdown extendido).
+2.  **Imágenes pesadas**.
+3.  **Lógica interactiva** mediante un script de cifrado.
+
+### 📊 Comparativa de Algoritmos
+| Algoritmo | Velocidad | Seguridad |
+| :--- | :--- | :--- |
+| César | 🔥 Instantáneo | ❌ Nula |
+| AES | ⚡ Rápido | ✅ Alta |
+| RSA | 🐢 Lento | 🔒 Máxima |
+
+---
+
+## 📸 Referencia Visual
+A continuación, una imagen para verificar el ajuste de proporciones (Aspect Ratio):
+
+IMAGEN: https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200
+
+---
+
+## 🧩 Ejercicio Interactivo: Cifrador César
+Usa este panel para entender cómo se desplazaban las letras en la antigua Roma. **Instrucciones:** Escribe en el cuadro y observa cómo el plugin procesa el texto en tiempo real.
+
+PLUGIN:
+const app = document.getElementById('app');
+app.innerHTML = `
+    <div style="background:#1e293b; padding:20px; border-radius:10px; color:white; border: 1px solid #3b82f6;">
+        <h3 style="margin-top:0">🔓 Decodificador César</h3>
+        <p>Desplazamiento: <input type="number" id="shift" value="3" style="width:40px"></p>
+        <textarea id="input" style="width:100%; height:60px; border-radius:5px;" placeholder="Escribe tu mensaje secreto..."></textarea>
+        <div style="margin-top:10px; padding:10px; background:#0f172a; border-left:4px solid #3b82f6;">
+            <strong>Resultado:</strong> <span id="result" style="color:#4ade80"></span>
+        </div>
+    </div>
+`;
+
+const cifrar = (texto, shift) => {
+    return texto.toUpperCase().replace(/[A-Z]/g, c => 
+        String.fromCharCode((c.charCodeAt(0) - 65 + parseInt(shift)) % 26 + 65)
+    );
+};
+
+const input = document.getElementById('input');
+const shift = document.getElementById('shift');
+const res = document.getElementById('result');
+
+const update = () => { res.innerText = cifrar(input.value, shift.value); };
+input.addEventListener('input', update);
+shift.addEventListener('input', update);
+
+# LECCION: Ingeniería Social
+# MODULO: 🚩 Evaluación Final
+
+Esta lección solo sirve para probar la navegación entre módulos.
+
+CONTENIDO: Si has llegado hasta aquí navegando desde el módulo anterior, el motor de navegación está funcionando correctamente.
+
+IMAGEN: https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800

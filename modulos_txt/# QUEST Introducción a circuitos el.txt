@@ -1,0 +1,36 @@
+# QUEST: Introducción a circuitos eléctricos
+TIPO: critical
+AUTOR: Tu nombre
+VERSION: 1.0
+
+# MODULO: Ley de Ohm
+ICONO: fa-bolt
+# LECCION: Relación V = I·R
+CONTENIDO: La tensión (voltios) es igual a la intensidad (amperios) por la resistencia (ohmios).
+# LECCION: Ejemplo
+CONTENIDO: Si una resistencia de 10 Ω se conecta a una pila de 5 V, ¿qué intensidad circula?
+TIPO_EJERCICIO: opcion_multiple
+OPCION: 0.5 A
+OPCION: 2 A
+OPCION: 50 A
+CORRECTA: 0
+FEEDBACK: I = V/R = 5/10 = 0.5 A.
+
+# MODULO: Asociación de resistencias
+ICONO: fa-project-diagram
+# LECCION: Serie
+CONTENIDO: En serie, la resistencia total es la suma: R_total = R1 + R2 + ...
+# LECCION: Paralelo
+CONTENIDO: En paralelo, la inversa de la total es la suma de las inversas: 1/R_total = 1/R1 + 1/R2 + ...
+TIPO_EJERCICIO: opcion_multiple
+OPCION: La resistencia total es menor que la menor de las resistencias.
+OPCION: La resistencia total es mayor que la mayor.
+CORRECTA: 0
+FEEDBACK: Correcto. En paralelo, la resistencia equivalente siempre es menor que la más pequeña.
+
+# MODULO: Leyes de Kirchhoff
+ICONO: fa-code-branch
+# LECCION: Ley de nodos
+CONTENIDO: La suma de corrientes que entran a un nodo es igual a la suma de corrientes que salen.
+# LECCION: Ley de mallas
+CONTENIDO: La suma de tensiones en una malla cerrada es cero.
