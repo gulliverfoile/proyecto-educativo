@@ -2,702 +2,797 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 Motor Pro v6.0 · Tutorial Integrado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Motor Seguro v11 · Alquimia Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        :root {
-            --primary: #3b82f6;
-            --primary-light: #dbeafe;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-            --radius: 20px;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            padding: 24px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            max-width: 1000px;
-            width: 100%;
-        }
+        /* Estilos base (heredados de v10, ligeramente adaptados) */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #f0f4f8; padding:15px; }
+        .container { max-width:1000px; margin:0 auto; }
         .header {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 20px 30px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            background: white; border-radius: 20px; padding: 15px 25px;
+            margin-bottom: 15px; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            flex-wrap: wrap; gap: 10px;
         }
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary) 0%, #2563eb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .header h1 { font-size: 1.6rem; color: #1e293b; }
+        .badge {
+            background: #dbeafe; color: #1e40af; padding: 5px 14px;
+            border-radius: 30px; font-size: 0.85rem; font-weight: 500;
         }
         .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px -2px rgba(59,130,246,0.3);
+            background: #2563eb; color: white; border: none; padding: 10px 20px;
+            border-radius: 30px; font-weight: 600; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;
         }
-        .btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(59,130,246,0.4);
-        }
-        .btn-outline {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            box-shadow: none;
-        }
-        .btn-outline:hover {
-            background: var(--primary-light);
-        }
-        .btn:disabled {
-            background: #cbd5e1;
-            box-shadow: none;
-            transform: none;
-            cursor: not-allowed;
-        }
-        .badge {
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .module-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .tab {
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--text-light);
-            padding: 10px 20px;
-            border-radius: 40px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .tab:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .tab.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-        .lesson-card {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            margin-bottom: 20px;
-        }
-        .lesson-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-        .lesson-content {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light);
-        }
-        .lesson-content h1 { font-size: 2rem; margin: 1.5rem 0 1rem; color: var(--text); }
-        .lesson-content h2 { font-size: 1.6rem; margin: 1.2rem 0 0.8rem; color: var(--text); }
-        .lesson-content h3 { font-size: 1.3rem; margin: 1rem 0 0.5rem; color: var(--text); }
-        .lesson-content ul, .lesson-content ol { margin-left: 1.5rem; margin-bottom: 1rem; }
-        .lesson-content li { margin-bottom: 0.3rem; }
-        .lesson-content p { margin-bottom: 1rem; }
-        .lesson-content a { color: var(--primary); text-decoration: none; font-weight: 500; }
-        .lesson-content a:hover { text-decoration: underline; }
-        .lesson-content pre {
-            background: #0f172a;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            border-left: 4px solid var(--primary);
-            margin: 1.5rem 0;
-        }
-        .lesson-content code {
-            background: #f1f5f9;
-            color: #0f172a;
-            padding: 0.2rem 0.4rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-        .lesson-content img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            box-shadow: var(--shadow);
-        }
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            background: #000;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .plugin-zone {
-            background: #0f172a;
-            border: 2px solid var(--primary);
-            border-radius: 16px;
-            margin-top: 30px;
-            overflow: hidden;
-        }
-        .plugin-frame {
-            width: 100%;
-            min-height: 400px;
-            border: none;
-            display: block;
-            background: #0f172a;
-        }
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .debug-console {
-            background: #0f172a;
-            color: #4ade80;
-            font-family: 'Fira Code', monospace;
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            max-height: 150px;
-            overflow-y: auto;
-            border: 1px solid #334155;
-        }
+        .btn:hover { background: #1d4ed8; }
+        .btn-outline { background: white; color: #2563eb; border: 2px solid #2563eb; }
+        .btn-outline:hover { background: #eff6ff; }
+        .btn-small { padding: 6px 14px; font-size: 0.85rem; }
         .hidden { display: none !important; }
-        .status-badge {
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.85rem;
+
+        .module-tabs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .module-tab {
+            background: white; border: 1px solid #cbd5e1; color: #475569;
+            padding: 8px 18px; border-radius: 30px; font-weight: 500;
+            cursor: pointer; transition: 0.2s;
+        }
+        .module-tab.active { background: #2563eb; border-color: #2563eb; color: white; }
+
+        .lesson-card {
+            background: white; border-radius: 20px; padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+        }
+        .lesson-title { font-size: 1.8rem; font-weight: 700; color: #0f172a; }
+        .lesson-content { margin: 20px 0; color: #334155; line-height: 1.6; }
+
+        .plugin-zone {
+            background: #0f172a; border-radius: 16px; padding: 10px;
+            margin-top: 20px; border: 2px solid #2563eb;
+            box-shadow: 0 0 20px rgba(37,99,235,0.2);
+            overflow: hidden;
+        }
+        .plugin-iframe { width: 100%; height: 500px; border: none; }
+
+        .nav-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .progress-indicator {
+            background: white; padding: 6px 16px; border-radius: 30px;
+            border: 1px solid #cbd5e1; color: #475569; font-size: 0.9rem;
+        }
+        .error-message {
+            background: #fee2e2; color: #991b1b; padding: 12px;
+            border-radius: 12px; border-left: 4px solid #ef4444; margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1><i class="fas fa-microchip"></i> Motor Pro v6.0</h1>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <span class="badge" id="fileStatus"><i class="fas fa-file"></i> Tutorial precargado</span>
-                <button class="btn btn-outline" onclick="App.resetProgress()"><i class="fas fa-undo"></i> Reiniciar</button>
-                <input type="file" id="fileInput" accept=".txt,.json,.yaml,.yml" style="display: none;">
-                <button class="btn" onclick="document.getElementById('fileInput').click()"><i class="fas fa-upload"></i> Cargar curso</button>
-            </div>
-        </header>
-
-        <div id="moduleTabs" class="module-tabs"></div>
-
-        <main class="lesson-card">
-            <h2 id="lessonTitle" class="lesson-title"></h2>
-            <div id="lessonContent" class="lesson-content"></div>
-            <div id="pluginZone" class="plugin-zone hidden">
-                <iframe id="pFrame" class="plugin-frame" sandbox="allow-scripts allow-modals allow-forms"></iframe>
-            </div>
-        </main>
-
-        <footer class="footer">
-            <button id="prevBtn" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Anterior</button>
-            <span id="progressText" style="font-weight:500; color:var(--text-light)"></span>
-            <button id="nextBtn" class="btn">Siguiente <i class="fas fa-arrow-right"></i></button>
-        </footer>
-
-        <div id="debug" class="debug-console">
-            > Sistema iniciado. Tutorial cargado por defecto.
-        </div>
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-atom"></i> Motor Seguro v11 · Alquimia</h1>
+        <span class="badge" id="currentFileBadge">Curso de isomería</span>
+        <input type="file" id="fileInput" accept=".txt,.json,.yaml,.yml" style="display:none;">
+        <button class="btn" onclick="document.getElementById('fileInput').click()">
+            <i class="fas fa-upload"></i> Cargar curso
+        </button>
     </div>
 
-    <script>
-        const App = {
-            curso: null,
-            mIdx: 0,
-            lIdx: 0,
+    <div id="courseContainer">
+        <div id="moduleTabs" class="module-tabs"></div>
+        <div class="lesson-card">
+            <div class="lesson-header">
+                <h2 id="lessonTitle" class="lesson-title"></h2>
+                <span id="lessonCounter" class="badge"></span>
+            </div>
+            <div id="lessonContent" class="lesson-content"></div>
+            <div id="pluginZone" class="plugin-zone hidden">
+                <iframe id="pluginFrame" class="plugin-iframe" sandbox="allow-scripts allow-same-origin"></iframe>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button id="prevBtn" class="btn btn-outline btn-small"><i class="fas fa-arrow-left"></i> Anterior</button>
+            <span id="progressText" class="progress-indicator"></span>
+            <button id="nextBtn" class="btn btn-small">Siguiente <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div id="errorDisplay" class="error-message hidden"></div>
+</div>
 
-            // Tutorial completo con 3 módulos: TXT, JSON, YAML
-            tutorial: {
-                modulos: [
-                    {
-                        nombre: "1. Formato TXT",
-                        lecciones: [
-                            {
-                                titulo: "Estructura básica de TXT",
-                                contenido: `# 📄 Formato TXT (etiquetas)
+<script>
+// ============================================
+// MOTOR SEGURO v11 - Arquitectura Hexagonal + Plugin Alquimia Digital
+// ============================================
+(function() {
+"use strict";
 
-El formato TXT es el más sencillo pero requiere cuidado con la sintaxis.
-
-## Reglas de oro:
-- Usa \`# MODULO:\` y \`# LECCION:\` para definir la jerarquía.
-- El contenido puede ser **Markdown** o texto plano.
-- Las etiquetas \`IMAGEN:\`, \`VIDEO:\`, \`PLUGIN:\` van después del contenido.
-- Para plugins multilínea, escribe todo debajo de \`PLUGIN:\` hasta la siguiente etiqueta.
-
-## Ejemplo:
-
-\`\`\`
-# MODULO: Conceptos básicos
-# LECCION: Mi primera lección
-
-CONTENIDO: Esto es **Markdown** con una lista:
-- Elemento 1
-- Elemento 2
-
-IMAGEN: https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600
-
-VIDEO: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-
-PLUGIN:
-const app = document.getElementById('app');
-app.innerHTML = '<h3 style=\"color:lime\">Plugin desde TXT</h3>';
-\`\`\`
-
-> **Nota:** No olvides los dos puntos después de cada etiqueta.`,
-                                plugin: `const app = document.getElementById('app'); app.innerHTML = '<div style="background:#10b981; color:white; padding:20px; text-align:center; border-radius:8px;">✅ Plugin TXT funcionando</div>';`
-                            },
-                            {
-                                titulo: "TXT: Consejos y errores comunes",
-                                contenido: `## ⚠️ Errores frecuentes
-
-1. **Espacios antes de #**: La línea debe empezar exactamente con \`#\`, sin espacios.
-2. **Olvidar los dos puntos**: Cada etiqueta lleva \`:\` después del nombre.
-3. **Mezclar contenido con etiquetas**: El texto de \`CONTENIDO:\` debe ir en una línea aparte.
-4. **Plugins rotos**: Si tu plugin tiene varias líneas, asegúrate de que no haya etiquetas en medio.
-
-## ✅ Buenas prácticas
-
-- Usa **Markdown** para dar formato al texto (negritas, listas, enlaces).
-- Las imágenes deben ser enlaces directos (terminar en .jpg, .png, etc.).
-- Para vídeos de YouTube, usa el enlace normal (el motor lo convertirá automáticamente a embed).`
-                            }
-                        ]
-                    },
-                    {
-                        nombre: "2. Formato JSON",
-                        lecciones: [
-                            {
-                                titulo: "Estructura JSON",
-                                contenido: `# 📦 Formato JSON
-
-El formato JSON es el más **estructurado** y **seguro** para máquinas. Es ideal si generas cursos automáticamente.
-
-## Estructura típica:
-
-\`\`\`json
-{
-  "modulos": [
-    {
-      "nombre": "Fundamentos",
-      "lecciones": [
-        {
-          "titulo": "Lección 1",
-          "contenido": "# Título\\n\\nContenido en Markdown.",
-          "imagen": "https://ejemplo.com/foto.jpg",
-          "video": "https://youtube.com/watch?v=abc123",
-          "plugin": "document.getElementById('app').innerHTML = '<h1>Hola</h1>';"
-        }
-      ]
+// ---------------------------------------------------------------
+// 1. NÚCLEO DE EVENTOS
+// ---------------------------------------------------------------
+class EventBus {
+    constructor() { this._listeners = {}; }
+    on(event, callback) {
+        if (!this._listeners[event]) this._listeners[event] = [];
+        this._listeners[event].push(callback);
+        return () => this.off(event, callback);
     }
-  ]
+    off(event, callback) {
+        const lst = this._listeners[event];
+        if (lst) this._listeners[event] = lst.filter(cb => cb !== callback);
+    }
+    emit(event, data) {
+        (this._listeners[event] || []).forEach(cb => { try { cb(data); } catch(e) { console.error(e); } });
+    }
 }
-\`\`\`
 
-## Características:
-- Las cadenas largas (como el contenido) deben escapar las comillas dobles.
-- Para saltos de línea usa \`\\n\`.
-- Es el formato preferido si usas editores de código.`,
-                                plugin: `const app = document.getElementById('app'); app.innerHTML = '<div style="background:#3b82f6; color:white; padding:20px; text-align:center; border-radius:8px;">✅ Plugin JSON funcionando</div>';`
-                            }
-                        ]
-                    },
-                    {
-                        nombre: "3. Formato YAML",
-                        lecciones: [
-                            {
-                                titulo: "Estructura YAML",
-                                contenido: `# 📐 Formato YAML
+// ---------------------------------------------------------------
+// 2. ESTADO DEL CURSO (inmutable)
+// ---------------------------------------------------------------
+class EstadoCurso {
+    constructor(curso = null) {
+        this.curso = curso;
+        this.moduloActual = 0;
+        this.leccionActual = 0;
+        this.historial = [];
+    }
+    get leccionActualObj() {
+        if (!this.curso) return null;
+        const mod = this.curso.modulos[this.moduloActual];
+        return mod ? mod.lecciones[this.leccionActual] : null;
+    }
+    navegarA(idLeccion) {
+        const { modIdx, lecIdx } = this._buscarLeccion(idLeccion);
+        if (modIdx === -1) return this;
+        const nuevo = this.clone();
+        nuevo.moduloActual = modIdx;
+        nuevo.leccionActual = lecIdx;
+        nuevo.historial = [...this.historial, { modulo: this.moduloActual, leccion: this.leccionActual }];
+        return nuevo;
+    }
+    _buscarLeccion(id) {
+        for (let m = 0; m < this.curso.modulos.length; m++) {
+            const lecs = this.curso.modulos[m].lecciones;
+            for (let l = 0; l < lecs.length; l++) {
+                if (lecs[l].id === id) return { modIdx: m, lecIdx: l };
+            }
+        }
+        return { modIdx: -1, lecIdx: -1 };
+    }
+    clone() {
+        const nuevo = new EstadoCurso(this.curso);
+        nuevo.moduloActual = this.moduloActual;
+        nuevo.leccionActual = this.leccionActual;
+        nuevo.historial = [...this.historial];
+        return nuevo;
+    }
+}
 
-YAML es el **equilibrio perfecto** entre legibilidad humana y estructura. Muy usado en configuraciones.
+// ---------------------------------------------------------------
+// 3. MOTOR DE NAVEGACIÓN (intérprete de grafos)
+// ---------------------------------------------------------------
+class MotorNavegacion {
+    constructor(estadoInicial, bus) {
+        this.estado = estadoInicial;
+        this.bus = bus;
+        this._setupListeners();
+    }
+    _setupListeners() {
+        this.bus.on('navegar:siguiente', () => this.siguiente());
+        this.bus.on('navegar:anterior', () => this.anterior());
+        this.bus.on('navegar:a', (id) => this.irA(id));
+        this.bus.on('plugin:accion', ({accion, destino}) => {
+            if (accion === 'siguiente' && destino) this.irA(destino);
+            else if (accion === 'repetir') this.irA(this.estado.leccionActualObj?.id);
+        });
+    }
+    siguiente() {
+        const lec = this.estado.leccionActualObj;
+        if (!lec) return;
+        if (lec.siguiente) return this.irA(lec.siguiente);
+        const mod = this.estado.curso.modulos[this.estado.moduloActual];
+        if (this.estado.leccionActual < mod.lecciones.length - 1) {
+            const nuevo = this.estado.clone();
+            nuevo.leccionActual++;
+            this._actualizarEstado(nuevo);
+        } else if (this.estado.moduloActual < this.estado.curso.modulos.length - 1) {
+            const nuevo = this.estado.clone();
+            nuevo.moduloActual++;
+            nuevo.leccionActual = 0;
+            this._actualizarEstado(nuevo);
+        }
+    }
+    anterior() {
+        if (this.estado.historial.length > 0) {
+            const ant = this.estado.historial.pop();
+            const nuevo = this.estado.clone();
+            nuevo.moduloActual = ant.modulo;
+            nuevo.leccionActual = ant.leccion;
+            this._actualizarEstado(nuevo);
+        }
+    }
+    irA(id) {
+        if (!id) return;
+        const nuevo = this.estado.navegarA(id);
+        if (nuevo !== this.estado) this._actualizarEstado(nuevo);
+    }
+    _actualizarEstado(nuevo) {
+        this.estado = nuevo;
+        this.bus.emit('estado:cambiado', this.estado);
+    }
+}
 
-## Ejemplo:
+// ---------------------------------------------------------------
+// 4. EXAMINADOR DE ARCHIVOS (parsea YAML/JSON/TXT)
+// ---------------------------------------------------------------
+class ExaminadorArchivos {
+    static parsear(contenido, nombre) {
+        const ext = nombre.split('.').pop().toLowerCase();
+        if (ext === 'yaml' || ext === 'yml') return this._desdeYAML(contenido);
+        if (ext === 'json') return this._desdeJSON(contenido);
+        if (ext === 'txt') return this._desdeTXT(contenido);
+        throw new Error(`Formato no soportado: .${ext}`);
+    }
+    static _desdeYAML(txt) { return this._validar(jsyaml.load(txt)); }
+    static _desdeJSON(txt) { return this._validar(JSON.parse(txt)); }
+    static _desdeTXT(txt) { /* simplificado */ return this._validar({modulos:[]}); }
+    static _validar(data) {
+        if (!data || !Array.isArray(data.modulos)) throw new Error('Falta "modulos"');
+        data.modulos.forEach((mod, mi) => {
+            if (!mod.lecciones) mod.lecciones = [];
+            mod.lecciones.forEach((lec, li) => {
+                if (!lec.id) lec.id = `mod${mi}_lec${li}`;
+                if (!lec.titulo) lec.titulo = `Lección ${li+1}`;
+                lec.contenido = lec.contenido || '';
+                lec.plugin = lec.plugin || null;
+                lec.config = lec.config || {};
+            });
+        });
+        return data;
+    }
+}
 
-\`\`\`yaml
-modulos:
-  - nombre: "Introducción"
-    lecciones:
-      - titulo: "Primera clase"
-        contenido: |
-          # Título
-          Esto es un contenido con **negritas**.
-          Lista:
-          - Uno
-          - Dos
-        imagen: "https://ejemplo.com/img.jpg"
-        video: "https://youtube.com/watch?v=xyz789"
-        plugin: |
-          const app = document.getElementById('app');
-          app.innerText = 'Hola desde YAML';
-\`\`\`
+// ---------------------------------------------------------------
+// 5. CATÁLOGO DE PLUGINS MAESTROS
+// ---------------------------------------------------------------
+class CargadorCatalogo {
+    constructor(json) {
+        this.plugins = {};
+        if (json && json.plugins) {
+            json.plugins.forEach(p => { if (p.id && p.codigo) this.plugins[p.id] = p; });
+        }
+    }
+    obtener(id) { return this.plugins[id] || null; }
+}
 
-## Ventajas:
-- Usa indentación (espacios) en lugar de llaves.
-- El operador \`|\` permite escribir texto multilínea sin escapes.
-- Es más limpio que JSON y menos propenso a errores de sintaxis.`,
-                                plugin: `const app = document.getElementById('app'); app.innerHTML = '<div style="background:#f59e0b; color:white; padding:20px; text-align:center; border-radius:8px;">✅ Plugin YAML funcionando</div>';`
-                            }
-                        ]
-                    }
-                ]
-            },
-
-            init() {
-                document.getElementById('fileInput').addEventListener('change', (e) => this.handleFile(e));
-                document.getElementById('prevBtn').onclick = () => this.navigate(-1);
-                document.getElementById('nextBtn').onclick = () => this.navigate(1);
-
-                // Cargar progreso guardado o usar tutorial
-                if (!this.loadProgress()) {
-                    this.curso = this.tutorial;
-                    this.mIdx = 0;
-                    this.lIdx = 0;
-                }
-                this.render();
-            },
-
-            log(msg) {
-                const d = document.getElementById('debug');
-                d.innerHTML += `<br>> ${msg}`;
-                d.scrollTop = d.scrollHeight;
-            },
-
-            handleFile(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    try {
-                        const raw = ev.target.result;
-                        if (file.name.endsWith('.json')) {
-                            this.curso = JSON.parse(raw);
-                        } else if (file.name.endsWith('.yaml') || file.name.endsWith('.yml')) {
-                            this.curso = jsyaml.load(raw);
-                        } else {
-                            this.curso = this.parseTXT(raw);
-                        }
-                        if (!this.curso.modulos || !Array.isArray(this.curso.modulos)) {
-                            throw new Error('El archivo debe contener un array "modulos".');
-                        }
-                        this.mIdx = 0;
-                        this.lIdx = 0;
-                        this.saveProgress();
-                        document.getElementById('fileStatus').innerHTML = `<i class="fas fa-check-circle"></i> ${file.name}`;
-                        this.log(`Archivo "${file.name}" cargado correctamente.`);
-                        this.render();
-                    } catch (err) {
-                        this.log(`❌ Error al cargar: ${err.message}`);
-                        alert('Error al parsear el archivo: ' + err.message);
-                    }
+// ---------------------------------------------------------------
+// 6. GESTOR DE PLUGINS (inyecta código en iframe)
+// ---------------------------------------------------------------
+class GestorPlugins {
+    constructor(catalogo, bus) { this.catalogo = catalogo; this.bus = bus; }
+    ejecutar(leccion, iframe) {
+        if (!leccion.plugin || !iframe) return;
+        const plugin = this.catalogo.obtener(leccion.plugin);
+        if (!plugin) { console.warn('Plugin no encontrado:', leccion.plugin); return; }
+        const cfg = JSON.stringify(leccion.config || {});
+        const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+            body{ margin:0; overflow:hidden; background:#0f172a; font-family:system-ui; }
+            canvas{ display:block; touch-action:none; }
+            #analyze-btn{ position:absolute; bottom:20px; right:20px; background:#2563eb; color:white; border:none; padding:12px 20px; border-radius:30px; font-weight:bold; cursor:pointer; z-index:10; }
+            #palette{ position:absolute; top:20px; left:20px; display:flex; gap:10px; z-index:10; flex-wrap:wrap; max-width:60%; }
+            .palette-atom{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; cursor:pointer; user-select:none; border:2px solid #ffffff40; }
+        </style></head><body>
+            <div id="palette"></div>
+            <button id="analyze-btn">🔍 Analizar</button>
+            <canvas id="alchemy-canvas"></canvas>
+            <script>
+                window.CONFIG = ${cfg};
+                window.callbacks = {
+                    onAccion: (accion, destino) => window.parent.postMessage({type:'plugin:accion', accion, destino}, '*'),
+                    log: (msg) => window.parent.postMessage({type:'plugin:log', msg}, '*')
                 };
-                reader.readAsText(file, 'UTF-8');
-            },
+                // El código del plugin se inyecta a continuación
+                ${plugin.codigo}
+            <\/script>
+        </body></html>`;
+        iframe.srcdoc = html;
+    }
+}
 
-            // Parseador de TXT robusto (multilínea para plugin)
-            parseTXT(text) {
-                const lines = text.split('\n');
-                const curso = { modulos: [] };
-                let curMod = null;
-                let curLec = null;
-                let pluginBuffer = [];
-                let isPlugin = false;
-                let contentBuffer = [];
-                let isContent = false;
+// ---------------------------------------------------------------
+// 7. PERSISTENCIA
+// ---------------------------------------------------------------
+class Persistencia {
+    guardar(clave, datos) { localStorage.setItem('ms11_'+clave, JSON.stringify(datos)); }
+    cargar(clave) { const v = localStorage.getItem('ms11_'+clave); return v ? JSON.parse(v) : null; }
+}
 
-                lines.forEach(line => {
-                    const trimmed = line.trim();
-                    if (trimmed === '') return;
+// ---------------------------------------------------------------
+// 8. RENDERIZADOR (UI principal)
+// ---------------------------------------------------------------
+class Renderizador {
+    constructor(bus, els) {
+        this.bus = bus; this.els = els;
+        bus.on('estado:cambiado', estado => this._render(estado));
+    }
+    _render(estado) {
+        const lec = estado.leccionActualObj;
+        if (!lec) return;
+        this.els.lessonTitle.innerText = lec.titulo;
+        const mod = estado.curso.modulos[estado.moduloActual];
+        this.els.lessonCounter.innerText = mod.nombre + ' · ' + (estado.leccionActual+1) + '/' + mod.lecciones.length;
+        this.els.lessonContent.innerHTML = this._md(lec.contenido);
+        if (lec.plugin) {
+            this.els.pluginZone.classList.remove('hidden');
+            this.bus.emit('plugin:ejecutar', lec);
+        } else {
+            this.els.pluginZone.classList.add('hidden');
+        }
+        const total = estado.curso.modulos.reduce((a,m) => a+m.lecciones.length, 0);
+        const global = estado.curso.modulos.slice(0, estado.moduloActual).reduce((a,m)=>a+m.lecciones.length,0) + estado.leccionActual+1;
+        this.els.progressText.innerText = 'Lección ' + global + ' de ' + total;
+        this.els.prevBtn.disabled = (estado.moduloActual===0 && estado.leccionActual===0);
+        const lastMod = estado.curso.modulos[estado.curso.modulos.length-1];
+        const esUltima = (estado.moduloActual===estado.curso.modulos.length-1 && estado.leccionActual===lastMod.lecciones.length-1);
+        this.els.nextBtn.disabled = esUltima;
+        this._renderTabs(estado);
+    }
+    _renderTabs(estado) {
+        this.els.moduleTabs.innerHTML = '';
+        estado.curso.modulos.forEach((mod, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'module-tab' + (idx===estado.moduloActual?' active':'');
+            btn.innerText = mod.nombre;
+            btn.onclick = () => this.bus.emit('ui:cambiarModulo', idx);
+            this.els.moduleTabs.appendChild(btn);
+        });
+    }
+    _md(txt) {
+        if (!txt) return '';
+        return txt.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')
+                  .replace(/`(.+?)`/g,'<code>$1</code>').replace(/\n/g,'<br>');
+    }
+}
 
-                    // Detectar etiquetas
-                    if (trimmed.startsWith('# MODULO:')) {
-                        curMod = { nombre: trimmed.substring(9).trim(), lecciones: [] };
-                        curso.modulos.push(curMod);
-                        isPlugin = false;
-                        isContent = false;
-                    } else if (trimmed.startsWith('# LECCION:')) {
-                        if (!curMod) {
-                            curMod = { nombre: 'Módulo sin nombre', lecciones: [] };
-                            curso.modulos.push(curMod);
-                        }
-                        curLec = {
-                            titulo: trimmed.substring(10).trim(),
-                            contenido: '',
-                            plugin: '',
-                            imagen: '',
-                            video: ''
-                        };
-                        curMod.lecciones.push(curLec);
-                        isPlugin = false;
-                        isContent = false;
-                    } else if (trimmed.startsWith('CONTENIDO:')) {
-                        isContent = true;
-                        isPlugin = false;
-                        const resto = trimmed.substring(10).trim();
-                        if (resto) contentBuffer.push(resto);
-                    } else if (trimmed.startsWith('PLUGIN:')) {
-                        isPlugin = true;
-                        isContent = false;
-                        const resto = trimmed.substring(7).trim();
-                        if (resto) pluginBuffer.push(resto);
-                    } else if (trimmed.startsWith('IMAGEN:')) {
-                        if (curLec) curLec.imagen = trimmed.substring(7).trim();
-                        isPlugin = false; isContent = false;
-                    } else if (trimmed.startsWith('VIDEO:')) {
-                        if (curLec) curLec.video = trimmed.substring(6).trim();
-                        isPlugin = false; isContent = false;
-                    } else {
-                        // Línea normal: acumular según contexto
-                        if (isPlugin && curLec) {
-                            pluginBuffer.push(line); // guardar la línea original (sin trim) para preservar indentación
-                        } else if (isContent && curLec) {
-                            contentBuffer.push(line);
-                        } else if (curLec && !isPlugin && !isContent) {
-                            // Si no hay bandera, se asume contenido (por si acaso)
-                            contentBuffer.push(line);
-                        }
-                    }
-                });
+// ---------------------------------------------------------------
+// 9. CATÁLOGO DE PLUGINS (datos)
+// ---------------------------------------------------------------
+const CATALOGO_BASE = {
+    plugins: [
+        {
+            id: "alquimia_digital",
+            nombre: "Alquimia Digital - Laboratorio Molecular",
+            config_schema: { required: ["atomos_disponibles"] },
+            codigo: `
+// ============================================
+// PLUGIN: Alquimia Digital (motor gráfico interno)
+// ============================================
+(function() {
+    const canvas = document.getElementById('alchemy-canvas');
+    const ctx = canvas.getContext('2d');
 
-                // Asignar buffers acumulados
-                if (contentBuffer.length > 0 && curLec) {
-                    curLec.contenido = contentBuffer.join('\n').trim();
+    // --- Configuración desde el curso ---
+    const availableAtoms = CONFIG.atomos_disponibles || ['C','H','O'];
+    const targetCompounds = CONFIG.compuestos_objetivo || [];
+
+    // --- Datos químicos ---
+    const ATOM_DATA = {
+        'C': { color: '#333333', radius: 20, valence: 4, mass: 12 },
+        'H': { color: '#ffffff', radius: 15, valence: 1, mass: 1 },
+        'O': { color: '#ef4444', radius: 18, valence: 2, mass: 16 },
+        'N': { color: '#3b82f6', radius: 18, valence: 3, mass: 14 },
+        'Cl':{ color: '#22c55e', radius: 18, valence: 1, mass: 35.5 }
+    };
+
+    // --- Base de datos de compuestos (isómeros del C4H10O) ---
+    const COMPOUND_DB = [
+        {
+            name: "butan-1-ol",
+            formula: "C4H10O",
+            graph: [
+                { atom:'C', bonds:[1] },
+                { atom:'C', bonds:[0,2] },
+                { atom:'C', bonds:[1,3] },
+                { atom:'C', bonds:[2,4] },
+                { atom:'O', bonds:[3] }
+            ],
+            group: "alcohol"
+        },
+        {
+            name: "butan-2-ol",
+            formula: "C4H10O",
+            graph: [
+                { atom:'C', bonds:[1] },
+                { atom:'C', bonds:[0,2,4] },
+                { atom:'C', bonds:[1,3] },
+                { atom:'C', bonds:[2] },
+                { atom:'O', bonds:[1] }
+            ],
+            group: "alcohol"
+        },
+        {
+            name: "metilpropan-1-ol",
+            formula: "C4H10O",
+            graph: [
+                { atom:'C', bonds:[1,2,3] },
+                { atom:'C', bonds:[0] },
+                { atom:'C', bonds:[0] },
+                { atom:'C', bonds:[0,4] },
+                { atom:'O', bonds:[3] }
+            ],
+            group: "alcohol"
+        },
+        {
+            name: "metilpropan-2-ol",
+            formula: "C4H10O",
+            graph: [
+                { atom:'C', bonds:[1,2,3] },
+                { atom:'C', bonds:[0] },
+                { atom:'C', bonds:[0] },
+                { atom:'C', bonds:[0,4] },
+                { atom:'O', bonds:[3] }
+            ],
+            group: "alcohol"
+        }
+    ];
+
+    // --- Estado de la escena ---
+    let atoms = [];            // { id, symbol, x, y, z, bonds:[] }
+    let nextAtomId = 0;
+    let selectedAtom = null;
+    let dragAtom = null;      // átomo siendo arrastrado
+    let isDragging = false;
+    let dragStart = null;
+    let cameraAngle = Math.PI/6;  // ángulo isométrico
+    let cameraZoom = 1.0;
+
+    // --- Inicializar canvas ---
+    function resize() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = 500; // fijo
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // --- Construir paleta de átomos ---
+    const paletteDiv = document.getElementById('palette');
+    availableAtoms.forEach(sym => {
+        const btn = document.createElement('div');
+        btn.className = 'palette-atom';
+        btn.style.backgroundColor = ATOM_DATA[sym]?.color || '#888';
+        btn.innerText = sym;
+        btn.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            // Crear nuevo átomo en el centro de la vista
+            const newAtom = {
+                id: nextAtomId++,
+                symbol: sym,
+                x: (Math.random()-0.5)*100,
+                y: (Math.random()-0.5)*100,
+                z: (Math.random()-0.5)*100,
+                bonds: []
+            };
+            atoms.push(newAtom);
+            drawScene();
+            selectedAtom = newAtom;
+        });
+        paletteDiv.appendChild(btn);
+    });
+
+    // --- Proyección isométrica ---
+    function isoProject(ax, ay, az) {
+        const cos = Math.cos(cameraAngle);
+        const sin = Math.sin(cameraAngle);
+        const px = (ax - az) * cos * cameraZoom;
+        const py = (-ax*0.5 - az*0.5) * sin * cameraZoom + ay * cameraZoom;
+        return { px, py };
+    }
+
+    // --- Dibujar escena ---
+    function drawScene() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const cx = canvas.width/2;
+        const cy = canvas.height/2;
+
+        // Dibujar enlaces
+        const drawn = new Set();
+        atoms.forEach(atom => {
+            atom.bonds.forEach(bondId => {
+                const other = atoms.find(a => a.id === bondId);
+                if (!other) return;
+                const key = atom.id < other.id ? atom.id+'-'+other.id : other.id+'-'+atom.id;
+                if (drawn.has(key)) return;
+                drawn.add(key);
+                const p1 = isoProject(atom.x, atom.y, atom.z);
+                const p2 = isoProject(other.x, other.y, other.z);
+                ctx.beginPath();
+                ctx.moveTo(cx + p1.px, cy - p1.py);
+                ctx.lineTo(cx + p2.px, cy - p2.py);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+        });
+
+        // Dibujar átomos
+        atoms.forEach(atom => {
+            const p = isoProject(atom.x, atom.y, atom.z);
+            const screenX = cx + p.px;
+            const screenY = cy - p.py;
+            const radius = ATOM_DATA[atom.symbol]?.radius || 16;
+            ctx.beginPath();
+            ctx.arc(screenX, screenY, radius, 0, Math.PI*2);
+            ctx.fillStyle = ATOM_DATA[atom.symbol]?.color || '#aaa';
+            ctx.fill();
+            ctx.strokeStyle = atom === selectedAtom ? '#fbbf24' : '#ffffff';
+            ctx.lineWidth = atom === selectedAtom ? 3 : 1;
+            ctx.stroke();
+            ctx.fillStyle = atom.symbol === 'C' ? '#ffffff' : '#000000';
+            ctx.font = 'bold 14px system-ui';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(atom.symbol, screenX, screenY);
+        });
+    }
+
+    // --- Lógica de enlace (conecta dos átomos si valencias libres) ---
+    function createBond(atom1, atom2) {
+        const a1data = ATOM_DATA[atom1.symbol];
+        const a2data = ATOM_DATA[atom2.symbol];
+        if (!a1data || !a2data) return false;
+        if (atom1.bonds.length >= a1data.valence || atom2.bonds.length >= a2data.valence) {
+            window.callbacks.log?.('Valencia máxima alcanzada');
+            return false;
+        }
+        if (atom1.bonds.includes(atom2.id)) return false; // ya conectados
+        atom1.bonds.push(atom2.id);
+        atom2.bonds.push(atom1.id);
+        drawScene();
+        return true;
+    }
+
+    // --- Análisis de molécula (grafo) ---
+    function analyzeMolecule() {
+        if (atoms.length === 0) return;
+        // Construir representación similar a la base de datos
+        const graph = atoms.map(atom => ({
+            atom: atom.symbol,
+            bonds: atom.bonds.map(bid => atoms.findIndex(a => a.id === bid))
+        }));
+        // Comparar con cada compuesto de la DB (isomorfismo simple: mismo número de átomos y mismo patrón de conectividad)
+        const atomCounts = {};
+        atoms.forEach(a => atomCounts[a.symbol] = (atomCounts[a.symbol]||0)+1);
+        for (let comp of COMPOUND_DB) {
+            // Comprobar fórmula
+            const compCounts = {};
+            comp.graph.forEach(n => compCounts[n.atom] = (compCounts[n.atom]||0)+1);
+            if (JSON.stringify(atomCounts) !== JSON.stringify(compCounts)) continue;
+            // Comprobar conectividad (comparar listas de grados)
+            const degrees1 = graph.map(n => n.bonds.length).sort((a,b)=>a-b);
+            const degrees2 = comp.graph.map(n => n.bonds.length).sort((a,b)=>a-b);
+            if (JSON.stringify(degrees1) === JSON.stringify(degrees2)) {
+                window.callbacks.log?.('✅ Coincide: ' + comp.name);
+                if (targetCompounds.includes(comp.name)) {
+                    window.callbacks.onAccion?.('siguiente', '');
                 }
-                if (pluginBuffer.length > 0 && curLec) {
-                    curLec.plugin = pluginBuffer.join('\n').trim();
-                }
-                return curso;
-            },
+                return;
+            }
+        }
+        window.callbacks.log?.('❌ No coincide con ningún isómero conocido');
+    }
 
-            saveProgress() {
-                const data = { m: this.mIdx, l: this.lIdx, curso: this.curso };
-                localStorage.setItem('motor_pro_v6', JSON.stringify(data));
-                this.log(`Progreso guardado: M${this.mIdx+1} L${this.lIdx+1}`);
-            },
+    document.getElementById('analyze-btn').addEventListener('click', analyzeMolecule);
 
-            loadProgress() {
-                const saved = localStorage.getItem('motor_pro_v6');
-                if (saved) {
-                    try {
-                        const p = JSON.parse(saved);
-                        if (p.curso && p.curso.modulos) {
-                            this.curso = p.curso;
-                            this.mIdx = p.m || 0;
-                            this.lIdx = p.l || 0;
-                            document.getElementById('fileStatus').innerHTML = `<i class="fas fa-history"></i> Sesión anterior`;
-                            this.log('Sesión anterior restaurada.');
-                            return true;
-                        }
-                    } catch (e) {}
-                }
-                return false;
-            },
+    // --- Manejo de entrada táctil/ratón ---
+    function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+    }
 
-            resetProgress() {
-                localStorage.removeItem('motor_pro_v6');
-                this.curso = this.tutorial;
-                this.mIdx = 0;
-                this.lIdx = 0;
-                document.getElementById('fileStatus').innerHTML = `<i class="fas fa-file"></i> Tutorial precargado`;
-                this.log('Progreso reiniciado. Tutorial cargado.');
-                this.render();
-            },
+    canvas.addEventListener('pointerdown', (e) => {
+        const pos = getPos(e);
+        const cx = canvas.width/2, cy = canvas.height/2;
+        // Buscar átomo cercano
+        let closest = null, minDist = 30;
+        atoms.forEach(atom => {
+            const p = isoProject(atom.x, atom.y, atom.z);
+            const dx = (cx + p.px) - pos.x;
+            const dy = (cy - p.py) - pos.y;
+            const d = Math.sqrt(dx*dx+dy*dy);
+            if (d < minDist) { minDist = d; closest = atom; }
+        });
+        if (closest) {
+            if (selectedAtom && selectedAtom !== closest) {
+                // Intentar crear enlace
+                createBond(selectedAtom, closest);
+                selectedAtom = null;
+            } else {
+                selectedAtom = closest;
+            }
+            dragAtom = closest;
+            isDragging = false;
+            dragStart = pos;
+            drawScene();
+        } else {
+            selectedAtom = null;
+            dragAtom = null;
+            drawScene();
+        }
+    });
 
-            render() {
-                if (!this.curso) return;
-                const mod = this.curso.modulos[this.mIdx];
-                if (!mod || !mod.lecciones || mod.lecciones.length === 0) return;
-                const lec = mod.lecciones[this.lIdx];
+    canvas.addEventListener('pointermove', (e) => {
+        if (!dragAtom) return;
+        const pos = getPos(e);
+        if (dragStart && Math.hypot(pos.x-dragStart.x, pos.y-dragStart.y) > 3) isDragging = true;
+        if (isDragging) {
+            const dx = pos.x - (dragStart?.x || pos.x);
+            const dy = pos.y - (dragStart?.y || pos.y);
+            dragAtom.x += dx * 0.1;
+            dragAtom.y += dy * 0.1;
+            dragStart = pos;
+            drawScene();
+        }
+    });
 
-                // Renderizar pestañas de módulos
-                const tabs = document.getElementById('moduleTabs');
-                tabs.innerHTML = '';
-                this.curso.modulos.forEach((m, i) => {
-                    const btn = document.createElement('div');
-                    btn.className = `tab ${i === this.mIdx ? 'active' : ''}`;
-                    btn.innerText = m.nombre;
-                    btn.onclick = () => {
-                        this.mIdx = i;
-                        this.lIdx = 0;
-                        this.saveProgress();
-                        this.render();
-                    };
-                    tabs.appendChild(btn);
-                });
+    canvas.addEventListener('pointerup', () => {
+        dragAtom = null;
+        isDragging = false;
+    });
 
-                // Título y contenido
-                document.getElementById('lessonTitle').innerText = lec.titulo;
-                let html = '';
-                if (lec.contenido) {
-                    // Usar marked si está disponible, sino texto plano
-                    html += window.marked ? marked.parse(lec.contenido) : lec.contenido.replace(/\n/g, '<br>');
-                }
+    // Giro de cámara con arrastre del fondo (si no hay átomo seleccionado)
+    canvas.addEventListener('pointerdown', (e) => {
+        if (dragAtom) return;
+        // Iniciar giro
+        const startPos = getPos(e);
+        function onMove(ev) {
+            const p = getPos(ev);
+            cameraAngle += (p.x - startPos.x) * 0.005;
+            drawScene();
+        }
+        function onUp() {
+            canvas.removeEventListener('pointermove', onMove);
+            canvas.removeEventListener('pointerup', onUp);
+        }
+        canvas.addEventListener('pointermove', onMove);
+        canvas.addEventListener('pointerup', onUp);
+    });
 
-                // Imagen
-                if (lec.imagen) {
-                    html += `<img src="${lec.imagen}" alt="imagen">`;
-                }
+    // Redibujar cada frame (bucle simple)
+    function loop() {
+        drawScene();
+        requestAnimationFrame(loop);
+    }
+    loop();
+})();
+`
+        }
+    ]
+};
 
-                // Video (YouTube)
-                if (lec.video) {
-                    let videoId = '';
-                    const match = lec.video.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
-                    if (match) videoId = match[1];
-                    if (videoId) {
-                        html += `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe></div>`;
-                    }
-                }
+// ---------------------------------------------------------------
+// 10. ORQUESTADOR (App)
+// ---------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const bus = new EventBus();
+    const persistencia = new Persistencia();
+    const catalogo = new CargadorCatalogo(CATALOGO_BASE);
 
-                document.getElementById('lessonContent').innerHTML = html;
+    const elements = {
+        moduleTabs: document.getElementById('moduleTabs'),
+        lessonTitle: document.getElementById('lessonTitle'),
+        lessonContent: document.getElementById('lessonContent'),
+        lessonCounter: document.getElementById('lessonCounter'),
+        pluginZone: document.getElementById('pluginZone'),
+        pluginFrame: document.getElementById('pluginFrame'),
+        prevBtn: document.getElementById('prevBtn'),
+        nextBtn: document.getElementById('nextBtn'),
+        progressText: document.getElementById('progressText'),
+        currentFileBadge: document.getElementById('currentFileBadge'),
+        errorDisplay: document.getElementById('errorDisplay'),
+        courseContainer: document.getElementById('courseContainer'),
+        fileInput: document.getElementById('fileInput')
+    };
 
-                // Plugin
-                const pz = document.getElementById('pluginZone');
-                const frame = document.getElementById('pFrame');
-                if (lec.plugin && lec.plugin.trim().length > 5) {
-                    pz.classList.remove('hidden');
-                    // Crear contenido del iframe con el plugin
-                    const pluginCode = lec.plugin;
-                    const frameContent = `
-                        <!DOCTYPE html>
-                        <html>
-                        <head>
-                            <meta charset="UTF-8">
-                            <style>
-                                body { margin:0; padding:20px; color:white; font-family:sans-serif; background:#0f172a; }
-                                #app { min-height: 200px; }
-                            </style>
-                        </head>
-                        <body>
-                            <div id="app"></div>
-                            <script>
-                                (function() {
-                                    try {
-                                        ${pluginCode}
-                                    } catch(e) {
-                                        document.body.innerHTML = '<div style="color:#ef4444; padding:20px;"><strong>Error en plugin:</strong> ' + e.message + '</div>';
-                                    }
-                                })();
-                            <\/script>
-                        </body>
-                        </html>
-                    `;
-                    frame.srcdoc = frameContent;
-                    this.log('Plugin ejecutado.');
-                } else {
-                    pz.classList.add('hidden');
-                    frame.srcdoc = '';
-                }
+    // Curso por defecto (isomería)
+    const defaultYaml = `
+titulo: Isomería de Alcoholes
+modulos:
+  - nombre: Isómeros del C4H10O
+    lecciones:
+      - id: intro
+        titulo: Introducción a la isomería
+        contenido: |
+          Los compuestos con fórmula **C4H10O** pueden ser alcoholes o éteres.
+          Construye los cuatro alcoholes isómeros usando el laboratorio digital.
+          Arrastra átomos desde la paleta, únelos y analiza la molécula.
+        siguiente: laboratorio
+      - id: laboratorio
+        titulo: Laboratorio de construcción molecular
+        contenido: |
+          Construye los isómeros **butan-1-ol**, **butan-2-ol**, **metilpropan-1-ol** y **metilpropan-2-ol**.
+          Gira la vista deslizando el fondo, arrastra átomos y conéctalos.
+          Pulsa **Analizar** para comprobar.
+        plugin: alquimia_digital
+        config:
+          atomos_disponibles: [C, H, O]
+          compuestos_objetivo: [butan-1-ol, butan-2-ol, metilpropan-1-ol, metilpropan-2-ol]
+        siguiente: fin
+      - id: fin
+        titulo: ¡Completado!
+        contenido: |
+          Has explorado la isomería de los alcoholes.
+          Recuerda que la estructura molecular determina las propiedades.
+    `;
 
-                // Actualizar contador
-                const totalLecciones = this.curso.modulos.reduce((acc, m) => acc + m.lecciones.length, 0);
-                const leccionGlobal = this.curso.modulos.slice(0, this.mIdx).reduce((acc, m) => acc + m.lecciones.length, 0) + this.lIdx + 1;
-                document.getElementById('progressText').innerText = `Módulo ${this.mIdx+1}/${this.curso.modulos.length} · Lección ${this.lIdx+1}/${mod.lecciones.length} (Global ${leccionGlobal}/${totalLecciones})`;
+    // Cargar curso
+    let cursoData;
+    try {
+        cursoData = ExaminadorArchivos._desdeYAML(defaultYaml);
+    } catch(e) { console.error(e); }
+    let estadoInicial = new EstadoCurso(cursoData);
 
-                // Botones
-                document.getElementById('prevBtn').disabled = (this.mIdx === 0 && this.lIdx === 0);
-                const isLast = (this.mIdx === this.curso.modulos.length - 1 && this.lIdx === mod.lecciones.length - 1);
-                document.getElementById('nextBtn').innerHTML = isLast ? 'Fin <i class="fas fa-check"></i>' : 'Siguiente <i class="fas fa-arrow-right"></i>';
-                document.getElementById('nextBtn').disabled = isLast;
-            },
+    // Persistencia
+    const saved = persistencia.cargar('progreso');
+    if (saved && saved.curso) {
+        estadoInicial = new EstadoCurso(saved.curso);
+        estadoInicial.moduloActual = saved.moduloActual || 0;
+        estadoInicial.leccionActual = saved.leccionActual || 0;
+    }
 
-            navigate(delta) {
-                const mod = this.curso.modulos[this.mIdx];
-                if (delta === 1) { // siguiente
-                    if (this.lIdx < mod.lecciones.length - 1) {
-                        this.lIdx++;
-                    } else if (this.mIdx < this.curso.modulos.length - 1) {
-                        this.mIdx++;
-                        this.lIdx = 0;
-                    } else {
-                        return; // fin del curso
-                    }
-                } else { // anterior
-                    if (this.lIdx > 0) {
-                        this.lIdx--;
-                    } else if (this.mIdx > 0) {
-                        this.mIdx--;
-                        this.lIdx = this.curso.modulos[this.mIdx].lecciones.length - 1;
-                    } else {
-                        return;
-                    }
-                }
-                this.saveProgress();
-                this.render();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+    const motor = new MotorNavegacion(estadoInicial, bus);
+    const gestorPlugins = new GestorPlugins(catalogo, bus);
+    const renderizador = new Renderizador(bus, elements);
+
+    bus.on('estado:cambiado', (est) => {
+        persistencia.guardar('progreso', { curso: est.curso, moduloActual: est.moduloActual, leccionActual: est.leccionActual });
+    });
+    bus.on('plugin:ejecutar', (leccion) => {
+        gestorPlugins.ejecutar(leccion, elements.pluginFrame);
+    });
+    bus.on('ui:cambiarModulo', (idx) => {
+        const nuevo = motor.estado.clone();
+        nuevo.moduloActual = idx;
+        nuevo.leccionActual = 0;
+        motor._actualizarEstado(nuevo);
+    });
+
+    window.addEventListener('message', (e) => {
+        if (e.data?.type === 'plugin:accion') {
+            bus.emit('plugin:accion', { accion: e.data.accion, destino: e.data.destino });
+        } else if (e.data?.type === 'plugin:log') {
+            console.log('[Plugin]', e.data.msg);
+        }
+    });
+
+    elements.prevBtn.onclick = () => bus.emit('navegar:anterior');
+    elements.nextBtn.onclick = () => bus.emit('navegar:siguiente');
+
+    elements.fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            try {
+                const nuevoCurso = ExaminadorArchivos.parsear(ev.target.result, file.name);
+                const nuevoEstado = new EstadoCurso(nuevoCurso);
+                motor._actualizarEstado(nuevoEstado);
+                elements.errorDisplay.style.display = 'none';
+                elements.courseContainer.style.display = 'block';
+            } catch(ex) {
+                elements.errorDisplay.style.display = 'block';
+                elements.errorDisplay.innerHTML = 'Error: ' + ex.message;
             }
         };
+        reader.readAsText(file);
+    };
 
-        App.init();
-    </script>
+    // Render inicial
+    renderizador._render(motor.estado);
+});
+
+})();
+</script>
 </body>
 </html>
